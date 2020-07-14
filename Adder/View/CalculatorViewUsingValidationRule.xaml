@@ -9,8 +9,7 @@
     mc:Ignorable="d" 
     d:DesignHeight="320" 
     d:DesignWidth="335"
-    Loaded="OnLoad" 
-    Unloaded="OnUnload">
+    Loaded="OnLoad">
 
     <UserControl.Resources>
         <DataTemplate DataType="{x:Type ValidationError}">

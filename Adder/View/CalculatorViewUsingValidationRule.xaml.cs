@@ -1,11 +1,8 @@
-﻿using System;
-using System.Windows.Input;
-using ValidationToolkit;
-using System.Globalization;
+﻿using ValidationToolkit;
 
 namespace Adder
 {
-    public partial class CalculatorViewUsingValidationRule : ValidationToolkit.ViewBase
+    public partial class CalculatorViewUsingValidationRule : ViewBase
     {
         public CalculatorViewUsingValidationRule()
         {
