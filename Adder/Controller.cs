@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Reflection;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows;
 using ValidationToolkit;
 
 namespace Adder
@@ -14,7 +11,7 @@ namespace Adder
             view.DataContext = CreateViewModel(ViewModelType);
         }
 
-        public static ValidationToolkit.ViewModel CreateViewModel(Type ViewModelType)
+        public static ViewModel CreateViewModel(Type ViewModelType)
         {
             Assembly assembly = ViewModelType.Assembly;
             AdderViewModel ViewModel = (AdderViewModel)assembly.CreateInstance(ViewModelType.FullName);
