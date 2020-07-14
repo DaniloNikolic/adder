@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Text;
 using System.Diagnostics;
 using System.Windows;
@@ -11,15 +9,15 @@ namespace ValidationToolkit
 {
     public class ViewBase : UserControl
     {
-        public virtual void OnLoad(object sender, System.Windows.RoutedEventArgs e)
+        public virtual void OnLoad(object sender, RoutedEventArgs e)
         {
             ErrorContainer = (IValidationErrorContainer)DataContext;
-            AddHandler(System.Windows.Controls.Validation.ErrorEvent, new RoutedEventHandler(Handler), true);
+            AddHandler(Validation.ErrorEvent, new RoutedEventHandler(Handler), true);
         }
 
-        public virtual void OnUnload(object sender, System.Windows.RoutedEventArgs e)
+        public virtual void OnUnload(object sender, RoutedEventArgs e)
         {
-            RemoveHandler(System.Windows.Controls.Validation.ErrorEvent, new RoutedEventHandler(Handler));
+            RemoveHandler(Validation.ErrorEvent, new RoutedEventHandler(Handler));
         }
 
         internal IValidationErrorContainer ErrorContainer = null;
@@ -27,9 +25,9 @@ namespace ValidationToolkit
         // Based on exception handler from Josh Smith blog.
         public void Handler(object sender, RoutedEventArgs e)
         {
-            System.Windows.Controls.ValidationErrorEventArgs args = e as System.Windows.Controls.ValidationErrorEventArgs;
+            ValidationErrorEventArgs args = e as ValidationErrorEventArgs;
 
-            if (args.Error.RuleInError is System.Windows.Controls.ValidationRule)
+            if (args.Error.RuleInError is ValidationRule)
             {
                 if (ErrorContainer != null)
                 {
@@ -44,7 +42,7 @@ namespace ValidationToolkit
 
                     // Construct the error message.
                     string errorMessage = "";
-                    ReadOnlyObservableCollection<System.Windows.Controls.ValidationError> errors = System.Windows.Controls.Validation.GetErrors(OriginalSource);
+                    ReadOnlyObservableCollection<System.Windows.Controls.ValidationError> errors = Validation.GetErrors(OriginalSource);
                     if (errors.Count > 0)
                     {
                         StringBuilder builder = new StringBuilder();
@@ -65,7 +63,7 @@ namespace ValidationToolkit
                     errorID.Append(args.Error.RuleInError.ToString());
                     if (args.Action == ValidationErrorEventAction.Added)
                     {
-                        ErrorContainer.AddError(new ValidationToolkit.ValidationError(propertyName, errorID.ToString(), errorMessage));
+                        ErrorContainer.AddError(new ValidationError(propertyName, errorID.ToString(), errorMessage));
                     }
                     else if (args.Action == ValidationErrorEventAction.Removed)
                     {
